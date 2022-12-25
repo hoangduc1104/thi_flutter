@@ -235,8 +235,6 @@ class LoginButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         //ApiClient().getToken();
-        print(Email);
-        print(password);
       },
       child: Container(
           margin: EdgeInsets.fromLTRB(0, 16, 0, 0),

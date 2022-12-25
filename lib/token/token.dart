@@ -11,7 +11,6 @@ class Token {
     var box = await Hive.openBox('tokenBox');
 
     final token = box.get('token');
-    print(token);
 
     return token;
   }

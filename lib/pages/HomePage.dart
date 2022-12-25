@@ -132,7 +132,6 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: true,
               children: [
                 ...productProvider.list.map((e) {
-                  print(e.id);
                   return ItemWidget(item: e);
                 }).toList()
               ],

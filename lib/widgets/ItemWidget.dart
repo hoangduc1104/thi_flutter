@@ -9,7 +9,6 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(item);
     return InkWell(
         onTap: () {
           Navigator.push(context,
@@ -78,7 +77,7 @@ class ItemWidget extends StatelessWidget {
             Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                item.description.toString(),
+                "description ne",
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(

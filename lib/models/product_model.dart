@@ -5,7 +5,7 @@ class ProductModel {
   String? id;
   String? name;
   double? price;
-  String? description;
+  // String? description;
   CategoryModel? category;
   String? productImage;
   ProductModel({

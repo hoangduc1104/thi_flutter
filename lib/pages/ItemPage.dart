@@ -18,7 +18,6 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.item);
     return Scaffold(
       backgroundColor: Color(0xFFEDECF2),
       body: ListView(
@@ -137,7 +136,7 @@ class _ItemPageState extends State<ItemPage> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      widget.item.description!,
+                      "description ne",
                       textAlign: TextAlign.justify,
                       style: TextStyle(fontSize: 17, color: Color(0xFF4C53A5)),
                     ),
