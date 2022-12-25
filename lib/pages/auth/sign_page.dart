@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:phuoc_duc_baithi/domain/api_clients/api_client.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
 
 class SignPage extends StatelessWidget {
@@ -88,7 +87,7 @@ class SignPage extends StatelessWidget {
                     )),
                     SizedBox(
                       height: 24,
-                    )
+                    ),
                   ],
                 ),
               )
@@ -196,20 +195,20 @@ class __SignFieldState extends State<_SignField> {
             ),
             InkWell(
               onTap: () async {
-                if (_formSignKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  await ApiClient()
-                      .createUser(
-                          email: _email,
-                          username: _username,
-                          password: _password)
-                      .then((int code) {
-                    if (code == 201) {
-                      Navigator.of(context).pop();
-                    }
-                  });
-                }
+                // if (_formSignKey.currentState!.validate()) {
+                //   ScaffoldMessenger.of(context)
+                //       .showSnackBar(SnackBar(content: Text('Processing Data')));
+                //   await ApiClient()
+                //       .createUser(
+                //           email: _email,
+                //           username: _username,
+                //           password: _password)
+                //       .then((int code) {
+                //     if (code == 201) {
+                //       Navigator.of(context).pop();
+                //     }
+                //   });
+                // }
               },
               child: Container(
                   margin: EdgeInsets.fromLTRB(0, 16, 0, 0),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:phuoc_duc_baithi/domain/api_clients/api_client.dart';
+import 'package:phuoc_duc_baithi/api_clients/api_client.dart';
+import 'package:phuoc_duc_baithi/pages/HomePage.dart';
 import 'package:phuoc_duc_baithi/pages/auth/sign_page.dart';
 import 'package:phuoc_duc_baithi/token/token.dart';
 
@@ -111,12 +112,12 @@ class _LoginField extends StatefulWidget {
 }
 
 class __LoginFieldState extends State<_LoginField> {
-  String _email = '';
+  String _Email = '';
   String _password = '';
   final _formKey = GlobalKey<FormState>();
 
-  void _changeEmail(String email) {
-    _email = email;
+  void _changeEmail(String Email) {
+    _Email = Email;
   }
 
   void _changePassword(String password) {
@@ -135,7 +136,7 @@ class __LoginFieldState extends State<_LoginField> {
               child: TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter valid email';
+                    return 'Please enter valid Email';
                   }
                   return null;
                 },
@@ -143,7 +144,7 @@ class __LoginFieldState extends State<_LoginField> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   icon: SvgPicture.asset('assets/icons/user.svg'),
-                  hintText: 'email',
+                  hintText: 'Email',
                 ),
               ),
             ),
@@ -171,17 +172,19 @@ class __LoginFieldState extends State<_LoginField> {
             ),
             InkWell(
               onTap: () async {
-                // print('jkakjbkajbkkaj');
                 if (_formKey.currentState!.validate()) {
                   ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
                   try {
                     await ApiClient()
-                        .getToken(email: _email, password: _password)
+                        .getToken(email: _Email, password: _password)
                         .then((String result) {
                       if (result != null) {
                         Token().writeToken(value: result);
-                        // Navigator.of(context).pop();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
                       }
                     });
                   } catch (error) {
@@ -218,12 +221,12 @@ class __LoginFieldState extends State<_LoginField> {
 
 class LoginButton extends StatelessWidget {
   final String label;
-  final String email;
+  final String Email;
   final String password;
   const LoginButton(
       {Key? key,
       required this.label,
-      required this.email,
+      required this.Email,
       required this.password})
       : super(key: key);
 
@@ -232,7 +235,7 @@ class LoginButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         //ApiClient().getToken();
-        print(email);
+        print(Email);
         print(password);
       },
       child: Container(

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:phuoc_duc_baithi/pages/HomePage.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
-import 'package:phuoc_duc_baithi/widgets/navigations/nav.dart';
-import "package:path_provider/path_provider.dart";
+import 'package:phuoc_duc_baithi/provider/category_provider.dart';
+import 'package:phuoc_duc_baithi/provider/product_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: LoginPage(),
       ),
-      home: LoginPage(),
     );
   }
 }

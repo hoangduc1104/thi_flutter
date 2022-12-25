@@ -1,35 +1,27 @@
-import 'package:flutter/cupertino.dart';
-import 'package:phuoc_duc_baithi/domain/api_clients/api_client.dart';
-import 'package:phuoc_duc_baithi/domain/entity/products.dart';
+import 'package:phuoc_duc_baithi/models/category_model.dart';
+import 'package:phuoc_duc_baithi/models/rating_model.dart';
 
-class ProductChangeModel extends ChangeNotifier {
-  final apiClient = ApiClient();
-  var _products = <ProductItem>[];
-  List<ProductItem> get products => _products;
-
-  Future<void> reloadProducts() async {
-    final products = await apiClient.getProducts();
-    _products = products;
-    notifyListeners();
-  }
-}
-
-class ProductModelProvider extends InheritedNotifier {
-  final ProductChangeModel model;
-  const ProductModelProvider({
-    Key? key,
-    required this.model,
-    required Widget child,
-  }) : super(key: key, notifier: model, child: child);
-
-  static ProductModelProvider? watch(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<ProductModelProvider>();
-  }
-
-  static ProductModelProvider? read(BuildContext context) {
-    final widget = context
-        .getElementForInheritedWidgetOfExactType<ProductModelProvider>()
-        ?.widget;
-    return widget is ProductModelProvider ? widget : null;
+class ProductModel {
+  String? id;
+  String? name;
+  double? price;
+  String? description;
+  CategoryModel? category;
+  String? productImage;
+  ProductModel({
+    this.id,
+    this.name,
+    this.price,
+    this.category,
+    this.productImage,
+  });
+  factory ProductModel.fromJson(Map<String, dynamic> obj, CategoryModel cate) {
+    return ProductModel(
+      id: obj["_id"],
+      name: obj['name'],
+      price: obj['price'].toDouble(),
+      category: cate,
+      productImage: obj['productImage'],
+    );
   }
 }
