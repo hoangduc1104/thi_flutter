@@ -28,7 +28,7 @@ class _ItemPageState extends State<ItemPage> {
           Padding(
             padding: EdgeInsets.all(16),
             child: Image.network(
-              widget.item.productImage!,
+              "http://localhost:3030/" + widget.item.productImage.toString(),
               height: 250,
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -36,6 +37,11 @@ class SideBar extends StatelessWidget {
                   onPressed: () async {
                     var box = await Hive.openBox('tokenBox');
                     var token = box.get('token');
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
                   },
                   child: Text('Logout'))
             ],
