@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
+import 'package:phuoc_duc_baithi/api_clients/api_client.dart';
 
 class SignPage extends StatelessWidget {
   const SignPage({Key? key}) : super(key: key);
@@ -107,19 +108,29 @@ class _SignField extends StatefulWidget {
 class __SignFieldState extends State<_SignField> {
   final _formSignKey = GlobalKey<FormState>();
   String _email = '';
-  String _username = '';
+  String _name = '';
   String _password = '';
+  String _confirmPassword = '';
+  String _phonenumber = '';
 
   void _changeEmail(String email) {
     _email = email;
   }
 
-  void _changeUsername(String username) {
-    _username = username;
+  void _changeName(String name) {
+    _name = name;
   }
 
   void _changePassword(String password) {
     _password = password;
+  }
+
+  void _changePhonenumber(String phonenumber) {
+    _phonenumber = phonenumber;
+  }
+
+  void _changeConfirmPassword(String confirmPassword) {
+    _confirmPassword = confirmPassword;
   }
 
   @override
@@ -159,15 +170,38 @@ class __SignFieldState extends State<_SignField> {
                   if (value == null ||
                       !RegExp(r"^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")
                           .hasMatch(value)) {
-                    return 'Please enter valid username';
+                    return 'Please enter valid name';
                   }
                   return null;
                 },
-                onChanged: _changeUsername,
+                onChanged: _changeName,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   icon: SvgPicture.asset('assets/icons/user.svg'),
-                  hintText: 'Username',
+                  hintText: 'Name',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.grey))),
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null ||
+                      !RegExp(r"^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")
+                          .hasMatch(value)) {
+                    return 'Please enter valid phonenumber';
+                  }
+                  return null;
+                },
+                onChanged: _changePhonenumber,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: SvgPicture.asset('assets/icons/user.svg'),
+                  hintText: 'Phonenumber',
                 ),
               ),
             ),
@@ -193,22 +227,53 @@ class __SignFieldState extends State<_SignField> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 24,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.grey))),
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                onChanged: _changeConfirmPassword,
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: SvgPicture.asset('assets/icons/password.svg'),
+                  hintText: 'Confirm password',
+                ),
+              ),
+            ),
             InkWell(
               onTap: () async {
-                // if (_formSignKey.currentState!.validate()) {
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text('Processing Data')));
-                //   await ApiClient()
-                //       .createUser(
-                //           email: _email,
-                //           username: _username,
-                //           password: _password)
-                //       .then((int code) {
-                //     if (code == 201) {
-                //       Navigator.of(context).pop();
-                //     }
-                //   });
-                // }
+                if (_formSignKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Processing Data')));
+                  if (_password == _confirmPassword) {
+                    try {
+                      await ApiClient().register(
+                          name: _name,
+                          phone: _phonenumber,
+                          email: _email,
+                          password: _password);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Register success')));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Invalid information')));
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Invalid information')));
+                  }
+                }
               },
               child: Container(
                   margin: EdgeInsets.fromLTRB(0, 16, 0, 0),
