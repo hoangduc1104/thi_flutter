@@ -54,7 +54,7 @@ class ItemWidget extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.all(10),
                 child: Image.network(
-                  item.productImage.toString(),
+                  "http://localhost:3000/" + item.productImage.toString(),
                   height: 130,
                   width: 120,
                 ),
@@ -64,7 +64,7 @@ class ItemWidget extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 8),
               alignment: Alignment.centerLeft,
               child: Text(
-                item.name.toString(),
+                item.productImage.toString(),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
