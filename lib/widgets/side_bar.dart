@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
+import 'package:phuoc_duc_baithi/pages/profile/pages/profile_page.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -43,7 +44,15 @@ class SideBar extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => LoginPage()),
                     );
                   },
-                  child: Text('Logout'))
+                  child: Text('Logout')),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                    );
+                  },
+                  child: Text('Profile'))
             ],
           )),
     );
