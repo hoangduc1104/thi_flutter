@@ -8,7 +8,7 @@ class ApiClient {
 
   Future<String> getToken(
       {required String email, required String password}) async {
-    var url = Uri.parse('http://localhost:3000/api/users/login');
+    var url = Uri.parse('http://localhost:3030/api/users/login');
     var response = await client.post(url,
         headers: {'Accept': 'application/json'},
         body: {'email': email, 'password': password});
@@ -23,7 +23,7 @@ class ApiClient {
       required String phone,
       required String email,
       required String password}) async {
-    var url = Uri.parse('http://localhost:3000/api/users/signup');
+    var url = Uri.parse('http://localhost:3030/api/users/signup');
     var response = await client.post(url, headers: {
       'Accept': 'application/json'
     }, body: {

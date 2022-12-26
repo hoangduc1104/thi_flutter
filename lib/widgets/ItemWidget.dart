@@ -54,7 +54,7 @@ class ItemWidget extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.all(10),
                 child: Image.network(
-                  "http://localhost:3000/" + item.productImage.toString(),
+                  "http://localhost:3030/" + item.productImage.toString(),
                   height: 130,
                   width: 120,
                 ),
