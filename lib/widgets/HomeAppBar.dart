@@ -29,13 +29,7 @@ class HomeAppBar extends StatelessWidget {
           ),
         ),
         Spacer(),
-        Badge(
-          badgeColor: Colors.red,
-          padding: EdgeInsets.all(7),
-          badgeContent: Text(
-            "3",
-            style: TextStyle(color: Colors.white),
-          ),
+        Container(
           child: InkWell(
             onTap: () {
               Navigator.push(

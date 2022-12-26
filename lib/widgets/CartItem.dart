@@ -18,12 +18,6 @@ class CartItem extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Radio(
-                  value: "",
-                  groupValue: "",
-                  activeColor: Color(0xFF4C53A5),
-                  onChanged: (index) {},
-                ),
                 Container(
                   height: 70,
                   width: 70,

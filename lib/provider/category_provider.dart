@@ -21,7 +21,8 @@ class CategoryProvider extends ChangeNotifier {
     // CategoryModel all =
     String allObj = '{"_id":"0","name":"All","__v":0}';
     CategoryModel allcate = CategoryModel.fromJson(jsonDecode(allObj));
-    list.add(allcate);
+    // list.add(allcate);
+    list.insert(0, allcate);
     notifyListeners();
   }
 }

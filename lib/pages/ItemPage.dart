@@ -19,7 +19,7 @@ class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEDECF2),
+      backgroundColor: Color(0xFFFFFFFF),
       body: ListView(
         children: [
           ItemAppBar(
@@ -136,7 +136,7 @@ class _ItemPageState extends State<ItemPage> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      "description ne",
+                      "porttitor id consequat in consequat ut nulla sed accumsan felis",
                       textAlign: TextAlign.justify,
                       style: TextStyle(fontSize: 17, color: Color(0xFF4C53A5)),
                     ),

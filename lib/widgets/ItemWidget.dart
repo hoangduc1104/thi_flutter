@@ -77,7 +77,7 @@ class ItemWidget extends StatelessWidget {
             Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                "description ne",
+                "porttitor id consequat in consequat ut nulla sed accumsan felis",
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(

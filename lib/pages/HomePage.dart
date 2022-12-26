@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             GridView.count(
-              childAspectRatio: 0.7,
+              childAspectRatio: 0.9,
               physics: NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
               shrinkWrap: true,
