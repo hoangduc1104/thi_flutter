@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:phuoc_duc_baithi/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class CartBottomNavBar extends StatelessWidget {
+  const CartBottomNavBar({
+    Key? key,
+    required this.tongtien,
+  }) : super(key: key);
+  final int tongtien;
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -21,7 +29,7 @@ class CartBottomNavBar extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\$55",
+                  "\$" + tongtien.toString(),
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

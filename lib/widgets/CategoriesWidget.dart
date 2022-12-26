@@ -21,6 +21,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
     if (categories.list.isEmpty) {
       categories.getList();
     }
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
