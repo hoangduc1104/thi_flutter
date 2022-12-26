@@ -18,6 +18,26 @@ class ApiClient {
     return token['token'];
   }
 
+  Future<void> register(
+      {required String name,
+      required String phone,
+      required String email,
+      required String password}) async {
+    var url = Uri.parse('http://localhost:3000/api/users/signup');
+    var response = await client.post(url, headers: {
+      'Accept': 'application/json'
+    }, body: {
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'password': password
+    });
+    client.close();
+
+    final token = jsonDecode(response.body);
+    print(token);
+  }
+
   Future<int> logout({
     required String token,
   }) async {
