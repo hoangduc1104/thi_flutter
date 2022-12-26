@@ -64,7 +64,7 @@ class ItemWidget extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 8),
               alignment: Alignment.centerLeft,
               child: Text(
-                item.productImage.toString(),
+                item.name.toString(),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(

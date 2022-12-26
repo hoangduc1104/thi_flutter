@@ -13,9 +13,10 @@ class ProductProvider extends ChangeNotifier {
   List<ProductModel> list = [];
 
   void getList(String category, String keyword) async {
-    String apiUrl = category == "All" || category == ""
-        ? product_service.ProductService.GetListProduct2
-        : product_service.ProductService.GetProductByCategory + category;
+    String apiUrl = product_service.ProductService.GetListProduct2;
+    // String apiUrl = category == "All" || category == ""
+    //     ? product_service.ProductService.GetListProduct2
+    //     : product_service.ProductService.GetProductByCategory + category;
     var client = http.Client();
     var jsonString = await client.get(
       Uri.parse(apiUrl),
@@ -49,6 +50,26 @@ class ProductProvider extends ChangeNotifier {
         }
       }
       list = result;
+    }
+
+    if (category != 'All' && category != '') {
+      var listCategoryById = jsonObject.map((e) {
+        var category = e['category'];
+        var cate = CategoryModel.fromJson(category);
+        return ProductModel.fromJson(e, cate);
+      }).toList();
+      notifyListeners();
+      List<ProductModel> result2 = [];
+      for (int i = 0; i < listCategoryById.length; i++) {
+        var item = listCategoryById[i];
+        final check =
+            item.category?.name?.toLowerCase().contains(category.toLowerCase());
+
+        if (check ?? false) {
+          result2.add(item);
+        }
+      }
+      list = result2;
     }
     notifyListeners();
   }

@@ -3,6 +3,7 @@ import 'package:phuoc_duc_baithi/provider/product_provider.dart';
 import 'package:phuoc_duc_baithi/widgets/CategoriesWidget.dart';
 import 'package:phuoc_duc_baithi/widgets/HomeAppBar.dart';
 import 'package:phuoc_duc_baithi/widgets/ItemWidget.dart';
+import 'package:phuoc_duc_baithi/widgets/side_bar.dart';
 import 'dart:developer' as developer;
 import 'package:provider/provider.dart';
 
@@ -41,6 +42,9 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+      drawer: Drawer(
+        child: SideBar(),
+      ),
       body: ListView(children: [
         HomeAppBar(),
         Container(
@@ -132,7 +136,6 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: true,
               children: [
                 ...productProvider.list.map((e) {
-                  print(e);
                   return ItemWidget(item: e);
                 }).toList()
               ],
