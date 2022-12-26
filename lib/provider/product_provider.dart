@@ -25,31 +25,31 @@ class ProductProvider extends ChangeNotifier {
       },
     );
     var jsonObject = jsonDecode(jsonString.body)['products'] as List;
-    print(jsonObject);
-    // if (keyword == "" && keyword.isEmpty) {
-    //   list = jsonObject.map((e) {
-    //     var category = e['category'];
-    //     var cate = CategoryModel.fromJson(category);
-    //     return ProductModel.fromJson(e, cate);
-    //   }).toList();
-    // }
-    // if (keyword != "" && keyword.isNotEmpty) {
-    //   var listSearch = jsonObject.map((e) {
-    //     var category = e['category'];
-    //     var cate = CategoryModel.fromJson(category);
-    //     return ProductModel.fromJson(e, cate);
-    //   }).toList();
-    //   List<ProductModel> result = [];
-    //   for (int i = 0; i < listSearch.length; i++) {
-    //     var item = listSearch[i];
-    //     final check = item.name?.toLowerCase().contains(keyword.toLowerCase());
 
-    //     if (check ?? false) {
-    //       result.add(item);
-    //     }
-    //   }
-    //   list = result;
-    // }
+    if (keyword == "" && keyword.isEmpty) {
+      list = jsonObject.map((e) {
+        var category = e['category'];
+        var cate = CategoryModel.fromJson(category);
+        return ProductModel.fromJson(e, cate);
+      }).toList();
+    }
+    if (keyword != "" && keyword.isNotEmpty) {
+      var listSearch = jsonObject.map((e) {
+        var category = e['category'];
+        var cate = CategoryModel.fromJson(category);
+        return ProductModel.fromJson(e, cate);
+      }).toList();
+      List<ProductModel> result = [];
+      for (int i = 0; i < listSearch.length; i++) {
+        var item = listSearch[i];
+        final check = item.name?.toLowerCase().contains(keyword.toLowerCase());
+
+        if (check ?? false) {
+          result.add(item);
+        }
+      }
+      list = result;
+    }
     notifyListeners();
   }
 }
