@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phuoc_duc_baithi/pages/HomePage.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
+import 'package:phuoc_duc_baithi/pages/profile/pages/profile_page.dart';
 import 'package:phuoc_duc_baithi/provider/category_provider.dart';
 import 'package:phuoc_duc_baithi/provider/product_provider.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: LoginPage(),
+        home: ProfilePage(),
       ),
     );
   }
