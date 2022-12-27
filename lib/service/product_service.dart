@@ -4,5 +4,7 @@ class ProductService {
 
   static const String GetorderbyUser = "http://localhost:3030/api/orders";
   static const String DeleteCart = "http://localhost:3030/api/orders/";
+  static const String addToCart = "http://localhost:3030/api/orders";
   static const String GetMe = "http://localhost:3030/api/users/me";
+  static const String checkout = "http://localhost:3030/api/orders";
 }

@@ -11,18 +11,18 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  int tongtien = 0;
   @override
   void initState() {
     super.initState();
+    var cartprovider = Provider.of<CartProvider>(context, listen: false);
+    cartprovider.getList();
   }
 
   @override
   Widget build(BuildContext context) {
     var cartprovider = Provider.of<CartProvider>(context);
-    if (cartprovider.list.isEmpty) {
-      cartprovider.getList();
-    }
+    int tongtien = 0;
+
     for (var element in cartprovider.list) {
       tongtien = tongtien + element.price! * element.quantity!;
     }
