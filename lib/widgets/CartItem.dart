@@ -84,7 +84,6 @@ class CartItem extends StatelessWidget {
                             ),
                             onPressed: () async {
                               String apiURL = ProductService.DeleteCart + e.id!;
-                              print(apiURL);
                               var client = http.Client();
                               var delete = await client.delete(
                                 Uri.parse(apiURL),

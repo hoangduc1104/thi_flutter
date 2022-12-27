@@ -1,6 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:phuoc_duc_baithi/models/addtocart_model.dart';
+import 'package:phuoc_duc_baithi/models/product_cart_model.dart';
+
 import 'package:phuoc_duc_baithi/models/product_model.dart';
+import 'package:phuoc_duc_baithi/pages/CartPage.dart';
 import 'package:phuoc_duc_baithi/pages/ItemPage.dart';
+import 'package:phuoc_duc_baithi/provider/cart_provider.dart';
+import 'package:phuoc_duc_baithi/service/product_service.dart';
+import 'package:phuoc_duc_baithi/token/token.dart';
+import 'package:provider/provider.dart';
 
 class ItemWidget extends StatelessWidget {
   ItemWidget({required this.item});
@@ -99,10 +110,40 @@ class ItemWidget extends StatelessWidget {
                       color: Color(0xFF4C53A5),
                     ),
                   ),
-                  Icon(
-                    Icons.shopping_cart_checkout,
-                    color: Color(0xFF4C53A5),
-                  )
+                  ElevatedButton(
+                      onPressed: () async {
+                        String apiURL = ProductService.addToCart;
+                        var client = http.Client();
+                        List<ProductCartModel> list = [];
+                        var product = ProductCartModel.fromJson({
+                          'productId': item.id,
+                          'quantity': 1,
+                          'price': item.price,
+                        });
+                        list.add(product);
+                        var test = new AddToCartModel(
+                            firstName: "abc",
+                            lastName: "abc",
+                            address: "abc",
+                            products: list);
+                        var body = test;
+                        var addtocart = await client.post(Uri.parse(apiURL),
+                            headers: {
+                              'Accept': 'application/json',
+                              'Authorization':
+                                  'Bearer ' + await (new Token()).readToken()
+                            },
+                            body: test.toJson());
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CartPage()),
+                        );
+                      },
+                      child: Icon(
+                        Icons.shopping_cart_checkout,
+                        color: Color(0xFF4C53A5),
+                      ))
                 ],
               ),
             ),
