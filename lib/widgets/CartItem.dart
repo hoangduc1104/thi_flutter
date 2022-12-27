@@ -9,13 +9,22 @@ import 'package:phuoc_duc_baithi/service/product_service.dart';
 import 'package:phuoc_duc_baithi/token/token.dart';
 import 'package:provider/provider.dart';
 
-class CartItem extends StatelessWidget {
+class CartItem extends StatefulWidget {
+  State<CartItem> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartItem> {
+  @override
+  void initState() {
+    super.initState();
+    var cartprovider = Provider.of<CartProvider>(context, listen: false);
+    cartprovider.getList();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cartprovider = Provider.of<CartProvider>(context);
-    if (cartprovider.list.isEmpty) {
-      cartprovider.getList();
-    }
+
     return Scrollbar(
       child: Column(
         children: [
