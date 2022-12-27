@@ -67,4 +67,17 @@ class ApiClient {
     });
     client.close();
   }
+
+  void changePassword(
+      {required String oldpassword, required String newPassword}) async {
+    var url = Uri.parse('http://localhost:3030/api/users/me/password');
+    var response = await client.patch(url, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + await (new Token()).readToken()
+    }, body: {
+      "oldPassword": oldpassword,
+      "newPassword": newPassword
+    });
+    client.close();
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:phuoc_duc_baithi/api_clients/api_client.dart';
 import 'package:phuoc_duc_baithi/models/user.dart';
+import 'package:phuoc_duc_baithi/pages/HomePage.dart';
 import 'package:phuoc_duc_baithi/pages/profile/pages/edit_description.dart';
 import 'package:phuoc_duc_baithi/pages/profile/pages/edit_email.dart';
 import 'package:phuoc_duc_baithi/pages/profile/pages/edit_image.dart';
@@ -15,173 +16,159 @@ import 'package:provider/provider.dart';
 import '../widgets/display_image_widget.dart';
 
 // This class handles the Page to dispaly the user's info on the "Edit Profile" Screen
-class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+class ChangePasswordPage extends StatefulWidget {
+  ChangePasswordPage({Key? key}) : super(key: key);
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ChangePasswordState createState() => _ChangePasswordState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ChangePasswordState extends State<ChangePasswordPage> {
   @override
   void initState() {
     super.initState();
-    var userProvider = Provider.of<UserProvider>(context, listen: false);
-    userProvider.getMe();
   }
 
   @override
   Widget build(BuildContext context) {
-    var userProvider = Provider.of<UserProvider>(context);
-    String _name = userProvider.user.name;
-    String _email = userProvider.user.email;
-    String _phone = userProvider.user.phone;
+    String _oldPassword = "";
+    String _newPassword = "";
+    String _confirmPassword = "";
 
-    void _changeName(String name) {
-      _name = name;
+    void _changeOldPassword(String oldpassword) {
+      _oldPassword = oldpassword;
     }
 
-    void _changeEmail(String email) {
-      _email = email;
+    void _changeNewPassword(String newPassword) {
+      _newPassword = newPassword;
     }
 
-    void _changePhone(String phone) {
-      _phone = phone;
+    void _changeConfirmPassword(String confirmPassword) {
+      _confirmPassword = confirmPassword;
     }
 
     return Scaffold(
       body: Column(
         children: [
           ItemAppBar(
-            name: "Profile",
+            name: "Change password",
           ),
           AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 10,
           ),
-          Container(
-              child: Container(
-                  child: Text(
-            'Edit Profile',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Color.fromRGBO(64, 105, 225, 1),
-            ),
-          ))),
-          InkWell(
-              onTap: () {},
-              child: DisplayImage(
-                imagePath:
-                    'https://www.shutterstock.com/image-vector/vector-icon-human-10-eps-600w-778054297.jpg',
-                onPressed: () {},
-              )),
-          Container(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 50, right: 50),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          border:
-                              Border(bottom: BorderSide(color: Colors.grey))),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null ||
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)) {
-                            return 'Please enter valid email';
-                          }
-                          return null;
-                        },
-                        onChanged: _changeName,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          icon: SvgPicture.asset('assets/icons/user.svg'),
-                          hintText: "Name",
-                        ),
-                        controller: TextEditingController(text: _name),
-                      )),
-                ),
-                SizedBox(
-                  height: 14,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 50, right: 50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(color: Colors.grey))),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null ||
-                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(value)) {
-                          return 'Please enter valid email';
-                        }
-                        return null;
-                      },
-                      onChanged: _changeEmail,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        icon: SvgPicture.asset('assets/icons/email.svg'),
-                        hintText: 'Email ID',
-                      ),
-                      controller: TextEditingController(text: _email),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 14,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 50, right: 50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(color: Colors.grey))),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null ||
-                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(value)) {
-                          return 'Please enter valid email';
-                        }
-                        return null;
-                      },
-                      onChanged: _changePhone,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        icon: SvgPicture.asset('assets/icons/user.svg'),
-                        hintText: 'Phone',
-                      ),
-                      controller: TextEditingController(text: _phone),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 14,
-                ),
-              ],
-            ),
-          ),
           Padding(
-            padding: EdgeInsets.only(right: 50, left: 50),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      ApiClient().updateUser(
-                          name: _name, email: _email, phone: _phone);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Update success')));
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Invalid information')));
-                    }
-                  },
-                  child: Text('Update')),
-            ),
-          )
+              padding: EdgeInsets.only(top: 20, right: 50, left: 50),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.grey))),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onChanged: _changeOldPassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: SvgPicture.asset('assets/icons/password.svg'),
+                        hintText: 'Old Password',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.grey))),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onChanged: _changeNewPassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: SvgPicture.asset('assets/icons/password.svg'),
+                        hintText: 'New Password',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.grey))),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onChanged: _changeConfirmPassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: SvgPicture.asset('assets/icons/password.svg'),
+                        hintText: 'Confirm password',
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      if (_newPassword == _confirmPassword) {
+                        try {
+                          ApiClient().changePassword(
+                              oldpassword: _oldPassword,
+                              newPassword: _newPassword);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Change password success')));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Invalid information')));
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Invalid information')));
+                      }
+                    },
+                    child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Color.fromRGBO(255, 185, 5, 1)),
+                        alignment: Alignment.center,
+                        height: 60,
+                        width: double.infinity,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Change password',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        )),
+                  )
+                ],
+              ))
         ],
       ),
     );

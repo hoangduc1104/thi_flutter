@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
+import 'package:phuoc_duc_baithi/pages/profile/pages/change_password.dart';
 import 'package:phuoc_duc_baithi/pages/profile/pages/profile_page.dart';
 
 class SideBar extends StatelessWidget {
@@ -52,7 +53,16 @@ class SideBar extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ProfilePage()),
                     );
                   },
-                  child: Text('Profile'))
+                  child: Text('Profile')),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChangePasswordPage()),
+                    );
+                  },
+                  child: Text('Change password'))
             ],
           )),
     );

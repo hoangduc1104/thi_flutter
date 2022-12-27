@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phuoc_duc_baithi/pages/HomePage.dart';
 import 'package:phuoc_duc_baithi/pages/auth/login_page.dart';
+import 'package:phuoc_duc_baithi/pages/profile/pages/change_password.dart';
 import 'package:phuoc_duc_baithi/pages/profile/pages/profile_page.dart';
 import 'package:phuoc_duc_baithi/provider/cart_provider.dart';
 import 'package:phuoc_duc_baithi/provider/category_provider.dart';
