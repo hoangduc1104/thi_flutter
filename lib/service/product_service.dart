@@ -3,4 +3,5 @@ class ProductService {
   static const String GetListCategory = "http://localhost:3030/api/categories";
 
   static const String GetorderbyUser = "http://localhost:3030/api/orders";
+  static const String DeleteCart = "http://localhost:3030/api/orders/";
 }

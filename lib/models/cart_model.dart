@@ -7,14 +7,16 @@ class CartModel {
   User? user;
   int? price;
   int? quantity;
+  String? id;
 
-  CartModel({this.productModel, this.user, this.price, this.quantity});
+  CartModel({this.productModel, this.user, this.price, this.quantity, this.id});
   factory CartModel.fromJson(
       Map<String, dynamic> obj, User user, ProductModel productmodel) {
     return CartModel(
         user: user,
         price: obj['price'],
         productModel: productmodel,
-        quantity: obj['quantity']);
+        quantity: obj['quantity'],
+        id: obj['_id']);
   }
 }
