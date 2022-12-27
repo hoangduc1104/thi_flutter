@@ -1,10 +1,9 @@
 class User {
-  String id;
-  String email;
-  String name;
-  String phone;
+  String? id;
+  String? email;
+  String? name;
+  String? phone;
 
-  // Constructor
   User({
     required this.id,
     required this.email,

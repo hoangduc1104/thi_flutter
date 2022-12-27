@@ -166,14 +166,6 @@ class __SignFieldState extends State<_SignField> {
               decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.grey))),
               child: TextFormField(
-                validator: (value) {
-                  if (value == null ||
-                      !RegExp(r"^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")
-                          .hasMatch(value)) {
-                    return 'Please enter valid name';
-                  }
-                  return null;
-                },
                 onChanged: _changeName,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -189,14 +181,6 @@ class __SignFieldState extends State<_SignField> {
               decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.grey))),
               child: TextFormField(
-                validator: (value) {
-                  if (value == null ||
-                      !RegExp(r"^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")
-                          .hasMatch(value)) {
-                    return 'Please enter valid phonenumber';
-                  }
-                  return null;
-                },
                 onChanged: _changePhonenumber,
                 decoration: InputDecoration(
                   border: InputBorder.none,
