@@ -8,7 +8,7 @@ class ItemAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.all(25),
+      padding: EdgeInsets.all(15),
       child: Row(
         children: [
           InkWell(
@@ -36,12 +36,6 @@ class ItemAppBar extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
-          Icon(
-            Icons.favorite,
-            size: 30,
-            color: Colors.red,
-          )
         ],
       ),
     );

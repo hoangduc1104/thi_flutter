@@ -6,4 +6,6 @@ class ProductService {
   //     "https://fakestoreapi.com/products/categories";
   static const String GetProductByCategory =
       "https://fakestoreapi.com/products/category/";
+  static const String host = "http://localhost:3030";
+  static const String GetMe = "$host/api/users/me";
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:phuoc_duc_baithi/models/product_model.dart';
+import 'package:phuoc_duc_baithi/token/token.dart';
 
 class ApiClient {
   final client = http.Client();
@@ -49,5 +50,21 @@ class ApiClient {
     client.close();
 
     return response.statusCode;
+  }
+
+  void updateUser(
+      {required String name,
+      required String email,
+      required String phone}) async {
+    var url = Uri.parse('http://localhost:3030/api/users/me');
+    var response = await client.put(url, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + await (new Token()).readToken()
+    }, body: {
+      'name': name,
+      'phone': phone,
+      'email': email
+    });
+    client.close();
   }
 }
