@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:phuoc_duc_baithi/provider/cart_provider.dart';
 import 'package:phuoc_duc_baithi/widgets/CartAppBar.dart';
 import 'package:phuoc_duc_baithi/widgets/CartBottomNavBar.dart';
 import 'package:phuoc_duc_baithi/widgets/CartItem.dart';
+import 'package:provider/provider.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  int tongtien = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var cartprovider = Provider.of<CartProvider>(context);
+    if (cartprovider.list.isEmpty) {
+      cartprovider.getList();
+    }
+    for (var element in cartprovider.list) {
+      tongtien = tongtien + element.price! * element.quantity!;
+    }
+
     return Scaffold(
       body: Scaffold(
         body: ListView(
           children: [
             CartAppBar(),
             Container(
-              height: 700,
+              height: 1000,
               padding: EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
                 color: Color(0xFFEDECF2),
@@ -55,7 +76,9 @@ class CartPage extends StatelessWidget {
             )
           ],
         ),
-        bottomNavigationBar: CartBottomNavBar(),
+        bottomNavigationBar: CartBottomNavBar(
+          tongtien: tongtien,
+        ),
       ),
     );
   }
